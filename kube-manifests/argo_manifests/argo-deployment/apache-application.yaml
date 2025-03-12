@@ -5,16 +5,16 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: argo-demo
-    server: https://kubernets.default.svc
   project: default
   source:
+    reploURL: https://github.com/dcli-com/cloud-lib/kube-manifests
     path: app_deployment_manifests/apache-deployment
-    reploURL: https://github.com/jpenn-dcli/kube-manifests
     targetRevision: master
-  syncPolicy:
-    automated:
-      selfHeal: true
+destination:
+    namespace: argo-demo
+    server: https://kubernets.default.svc
+syncPolicy:
+  automated:
+    selfHeal: true
     syncOptions:
       - CreateNamespace=true

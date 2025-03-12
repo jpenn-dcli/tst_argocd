@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: com-alb-ingress
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    reploURL: https://github.com/dcli-com/cloud-lib/kube-manifests
+    path: app_deployment_manifests/com-demo-alb-ingress-80.yaml
+    targetRevision: master
+destination:
+    namespace: argo-demo
+    server: https://kubernets.default.svc
+syncPolicy:
+  automated:
+    selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
