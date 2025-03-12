@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    reploURL: https://github.com/dcli-com/cloud-lib/kube-manifests
+    reploURL: https://github.com/jpenn-dcli/tst_argocd/tree/main/kube-manifests
     path: app_deployment_manifests/tomcat-deployment
     targetRevision: master
 destination:
