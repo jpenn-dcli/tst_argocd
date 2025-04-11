@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facade-app    
+  labels:
+    app: facade-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: facade-app
+  template:
+    metadata:
+      labels:
+        app: facade-app
+    spec:
+      containers:
+        - name: facade-app
+          image: 977099017816.dkr.ecr.us-east-1.amazonaws.com/supernova:facade_feature-SN-572_51b14dd1
+          ports:
+            - containerPort: 8081
+      imagePullSecrets:
+        - name: aws-ecr-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: facade-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: facade-app
+  ports:
+    - port: 80
+      targetPort: 8081
